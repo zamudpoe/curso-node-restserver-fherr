@@ -2,7 +2,7 @@
 
 Tenemos que respaldar todo el proyecto a Github , pero adicionalmente antes de subirlo a cualquier lugar, tenemos que quitar lo que son los modulos de node.
 
-Creamos el archivo .gitignore para ignorar archivos y carpetas que no deban subirse a nuestro repositorio de github. 
+Creamos el archivo ``.gitignore`` para ignorar archivos y carpetas que no deban subirse a nuestro repositorio de github. 
 
 
 ## PASOS
