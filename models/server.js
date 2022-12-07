@@ -8,7 +8,7 @@ class Server {
   constructor() { 
     
     this.app      = express()                //:::::::::::::[ EXPRESS SERVER ] 
-    this.port     = process.env.PORT || 3500 //::::::[ VARIABLES DE AMBIENTE ] 
+    this.port     = process.env.PORT || 4500 //::::::[ VARIABLES DE AMBIENTE ] 
     this.userPath = '/api/usuarios'  
 
     //::::::::::::::::::::[ MIDDLEWARES ]  
