@@ -4,14 +4,14 @@ const usuariosGet = ( req , res ) => {
 
   //const query = req.query
   //console.log( 'query Params: %o', query )
-  const { q , empresa = "No Definido", page = 1, limit, apikey } = req.query
+  const { q , nombre = "No Definido", page = 1, limit, apikey } = req.query
 
-  //console.log( 'q : %s empresa: %s  apikey: %s', q, empresa, apikey )
+  //console.log( 'q : %s nombre: %s  apikey: %s', q, nombre, apikey )
 
   res.json({
     msg: "GET API - usuariosGet" , 
     q , 
-    empresa , 
+    nombre , 
     apikey , 
     page , 
     limit 
@@ -22,7 +22,7 @@ const usuariosGet = ( req , res ) => {
 const usuariosPost =  ( req, res ) => { 
   const { nombre, edad } = req.body  
   
-  console.log('\n\tNombre:'.cyan.bold + nombre.green.bold + ' Edad: '.cyan.bold + String(edad).yellow.bold +'.\n' ) 
+  console.log('\n\tNombre :'.cyan.bold + nombre.green.bold + ' Edad: '.cyan.bold + String(edad).yellow.bold +'.\n' ) 
 
   res.json({
     msg: "POST API - usuariosPost" , 
