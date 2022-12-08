@@ -103,7 +103,7 @@ Creamos el archivo ``.gitignore`` para ignorar archivos y carpetas que no deban 
 
 3. Genial ya tenemos respaldado a nivel local, si el dia de mañana borramos algo y queremos restaurar todo el proyecto al momento del commit , lo unico que tenemos que hacer es:  ``git checkout -- .`` y todo el proyecto se restaurara al primer commit. 
 
-
+ 
 --- 
 
 ## CREAR NUEVO REPOSITORIO EN [GITHUB] 
