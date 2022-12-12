@@ -1,0 +1,6 @@
+PORT=4500
+MONGO_ATLAS_CNN=mongodb+srv://user_node_cafe:Temporal2022@miclustercafe.pztm0.mongodb.net/cafeDB
+
+USER=user_node_cafe 
+PASS=Temporal2022 
+
