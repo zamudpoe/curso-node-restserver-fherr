@@ -1,11 +1,12 @@
 /* ---------------------------- [ IMPORTACIONES ] --------------------------- */
-const { 
+/* const { 
   request: req , 
   response: res 
-}                     = require('express')
+}                     = require('express') */
 const bcryptjs        = require('bcryptjs')
 
 const Usuario         = require('../models/usuario') 
+ 
 
 /* 
   Al usarlo son la 'U' mayusucula nos permitira crear instancias de nuestro modelo usuario
@@ -19,23 +20,23 @@ const usuariosGet = async ( req , res ) => {
   let { q, nombre = 'No Name', apiKey, desde=0, limite=5 } = req.query 
   const query = { estado: true }
 
-  desde  = (typeof  desde !== 'number') ? 0 : desde  
-  limite = (typeof limite !== 'number') ? 5 : limite 
+  desde  = (typeof  Number(desde) !== 'number') ? 0 : desde  
+  limite = (typeof Number(limite) !== 'number') ? 5 : limite 
   
   /*  ESTO NO ES FUNCIONALMENTE CORRECTO POR QUE SE RESUELVEN DE FORMA INDEPENDIENTE Y CON DESFASE */
   /* const usuarios = await Usuario.find(query)
   .skip( Number(desde) ) 
   .limit( Number(limite) ) 
   
-  const totalRegistros  = await Usuario.countDocuments(query)  */
+  const totalRegistros  = await Usuario.countDocuments(query) */ 
   
 
   /* TENDREMOS LA RESPUESTA HASTA QUE TODAS LAS PROMESAS SE RESUELVAN! */
   const [ totalRegistros, usuarios ] = await Promise.all([ 
-    Usuario.countDocuments(query) , 
-    Usuario.find(query)
-      .skip( Number(desde) ) 
-      .limit( Number(limite)) 
+    Usuario.countDocuments( query ), 
+    Usuario.find( query )
+      .skip( Number( desde ) ) 
+      .limit( Number( limite ) ) 
   ]).finally( () => console.log("PROMESAS REALIZADAS") )
   
   console.clear() 
@@ -43,7 +44,7 @@ const usuariosGet = async ( req , res ) => {
   console.log( '\n\tExisten un total de [  %s  ] documentos para USUARIOS en la BD \n' , totalRegistros )   
 
   res.json({ 
-    /* resp */
+    /* resp */ 
     totalRegistros,
     usuarios 
   })  
@@ -59,6 +60,7 @@ const usuariosPost = async ( req, res ) => {
   const salt       = bcryptjs.genSaltSync() 
   usuario.password = bcryptjs.hashSync( password, salt ) 
 
+  //console.log("usuario.password :", usuario.password)
   // Guardar en DB.  
   await usuario.save() 
 
@@ -105,20 +107,25 @@ const usuariosPatch = ( req, res ) => {
 
 /* DELETE REQUEST */
 const usuariosDelete = async ( req, res ) => { 
-  const { id }    = req.params   
+
+  const { id }  = req.params 
+  const usuario = await Usuario.findByIdAndUpdate( id , { estado: false } ) // Lo Marcamos inactivo. 
   
-  // BORRADO PERMAMENTE DE LA DB  
-  const usuario = await Usuario.findByIdAndUpdate( id , { estado: false } )   
-  console.log( `\n\tEl usuario ' ${ String(usuario.nombre).yellow.bold } ' ${String('con id [').cyan} ${ String( id ).yellow } ${ String('] se ha inhabilitado en el sistema [ estado:').cyan } ${ String( usuario.estado ).white.bold } ${ String( ']\n' ).cyan }`.cyan  )
+  /* 
+    1. Obtener usuario autenticado.  
+       const usuarioAutenticado = req.usuarioAut  
+    2. agreagr el usuario autenticado
+       res.json( { usuario , usuarioAutenticado } )  
+  */
 
   res.json( usuario ) 
 } 
- 
+
 /* --------------- [ EXPORTAMOS LAS FUNCIONES CONTROLADORAS ] --------------- */
 module.exports = {  
   usuariosGet , 
   usuariosPost ,
-  usuariosPut , 
+  usuariosPut ,  
   usuariosPatch , 
-  usuariosDelete , 
+  usuariosDelete 
 }

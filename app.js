@@ -4,4 +4,4 @@ require('dotenv').config()
 // Instancia del server 
 const server = new Server()
 // Invocamos el server 
-server.listen() 
+server.listen()  

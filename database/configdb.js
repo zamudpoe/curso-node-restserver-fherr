@@ -1,8 +1,8 @@
 const mongoose     = require('mongoose')
-
-
+ 
 const dbConnection = async () => { 
-
+  console.clear() 
+  
   try { 
     await mongoose.connect( process.env.MONGO_ATLAS_CNN /* , {
       useNewUrlParser       : true,
@@ -11,14 +11,14 @@ const dbConnection = async () => {
       useFindAndModified     : false
     } */) 
 
-    console.log( `\n\t[ DB ONLINE ]\n`.bgGreen.white.bold ) 
+    console.log( `\n\t[ DB ONLINE ]\n` ) 
 
   } catch ( error ) { 
     console.log( error )  
-    throw new Error('\n\tError al iniciar la base de datos\n'.cyan.bold) 
+    throw new Error ( error.msg ) 
   } 
 
 }
 
 module.exports = { dbConnection }
- 
+  

@@ -9,16 +9,24 @@ class Server {
   /*::::::::::::::::::::::::::::::[ Constructor ]::::::::::::::::::::::::::::::*/
   constructor() { 
     
-    this.app      = express()                //:::::::::::::[ EXPRESS SERVER ] 
-    this.port     = process.env.PORT || 3500 //::::::[ VARIABLES DE AMBIENTE ] 
-    this.userPath = '/api/usuarios'  
+    this.app      = express()                  //:::::::::::::[ EXPRESS SERVER ] 
+    this.port     = process.env.PORT || 3500   //::::::[ VARIABLES DE AMBIENTE ] 
 
+    this.paths = {
+      auth          : '/api/auth' ,
+      buscar        : "/api/buscar",
+      categorias    : '/api/categorias',
+      productos     : '/api/productos',
+      usuarios      : '/api/usuarios',
+
+    }
+  
     //::::::::::::::::::::[ DB CONNECTION ]  
     this.conectarDB()
 
     //::::::::::::::::::::[ MIDDLEWARES ]  
     this.middlewares() 
-
+ 
     //::::::::::::::::::::[ RUTAS '../routes/usuarios.routes' DE MI APP ] 
     this.routes() 
     
@@ -51,15 +59,26 @@ class Server {
 
   routes() { 
     // Middleware condicional para la ruta / 
-    this.app.use( this.userPath, require('../routes/usuarios.routes') )  
-  }
+    this.app.use( this.paths.auth       , require('../routes/auth.route') )     // BUSQUEDAS 
+    this.app.use( this.paths.buscar     , require('../routes/buscar.route') ) 
+    this.app.use( this.paths.categorias , require('../routes/categorias.route') ) 
+    // Nueva Ruta PRODUCTOS
+    this.app.use( this.paths.productos  , require('../routes/productos.route') ) 
+    this.app.use( this.paths.usuarios   , require('../routes/usuarios.route') ) 
 
-  listen() {
+    // Manejo de solicitudes no coincidentes del cliente
+    this.app.use( (req, res, next) => { 
+      console.console.log( `Ruta No encontrada ${req.params }` ) 
+      res.status(404).send({ msg: "Ruta No encontrada" }) 
+    }) 
+  } 
+
+  listen() { 
     /* --------------------------[ INICIO DE SERVER ]-------------------------- */
     this.app.listen( this.port, () => {  
       console.log( `\n\n\tServidor (con CORS Habilitado) ejecutandose en el puerto [ ${ String( this.port ).yellow.bold } ] \n`.bgGreen.white ) 
     } )
-  }
+  } 
 
 }
 

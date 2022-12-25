@@ -43,9 +43,13 @@ const UsuarioSchema = Schema({
 // NOTA: Cuando se mande llamar el metodo toJSON 
 //       se ejecutara esta funcion!. 
 UsuarioSchema.methods.toJSON = function (  ) { 
-  // agregamos los campos que queremos quitar __v, password 
+  // Agregamos los campos que queremos quitar __v, password y _id 
   // y los demas campos los agruparemos en visibleUser
-  const { password, __v , ...visibleUser } = this.toObject() 
+  const { password, __v, _id , ...visibleUser } = this.toObject() 
+  
+  // Agreagamos la propiedad uid y le asignamos el valor del _id 
+  visibleUser.uid = _id
+
   return visibleUser 
 }
 

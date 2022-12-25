@@ -14,5 +14,7 @@ module.exports = model( 'Role', RoleSchema )
   Recordemos que mongoose le agrega la 's' faltante , 
   ya que la coleccion guardada en mongo atlas es 'roles' 
   y no 'role' 
+
+  nota: Los roles los creamos en mongoDb compass
 */
 

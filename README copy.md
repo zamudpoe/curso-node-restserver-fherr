@@ -1,43 +1,42 @@
-# 168 Nuevo Despliegue a Railway
+# **[** 186 **]** Buscar En Otras Colleccioines
 
-### Tarea - Desplegar en Railway
+Haremos busquedas en otras colecciones por medio del metodo populate , haciendo la union con la llave foranea , veamos esto con la funcion ``buscarProductos`` , cuando hacemos la instancia del modelo producto le anexamos el metodo populate con el cual haremos la consulta a otras coleccionies , en este caso a la coleccion **``categoria``** y la coleccion **``usuario``** 
 
-Los quiero invitar a que intenten hacer el despliegue de su aplicación a Railway por su cuenta.
+```javascript
+const buscarProductos = async ( termino='', res = response  ) => { 
+
+  try { 
+    const esMongoID = ObjectId.isValid( termino ) // TRUE 
+    if ( esMongoID ) { 
+      const producto = await Producto.findById( termino )
+                              .populate("categoria", "nombre")
+                              .populate("usuario", "nombre") 
+      console.log( producto ) 
+      return res.status(200).json( { 
+        results: (producto) ? [ producto ] : [] 
+      } ) 
+    } 
+   
+    const regex = new RegExp( termino , 'i' ) 
+    const productos = await Producto.find({ 
+      $or : [ { nombre: regex } ], 
+      $or : [ { descripcion: regex } ], 
+      $and: [ { estado : true } ] 
+    })
+    .populate("categoria", "nombre") 
+    .populate("usuario", "nombre") 
+   
+    return res.status(200).json( { 
+      results : productos 
+    } ) 
+
+  } catch ( error ) {
+    console.log(`error: ${ error.message }`)
+  }
+
+}  
 
 
-### Pasos que les pueden ayudar:
+```
 
-1. Cambios en su repositorio
-    ```
-    git checkout -b 4.0.0
-
-    git add .
-
-    git commit -m "Fin sección 11 - version 4.0.0"
-    ```
-
-
-1. Crear y subir una rama: 
-    ```git
-    git push
-    ```
-
-    (Ese comando dará un error)
-
-    Usar el comando en la descripción del error para subir la rama.
-
-1. En **Railway**, seleccionar la **rama ``4.0.0``** para desplegar
-
-2. Revisar si hay cambios en variables de entorno necesarias
-
-3. Esperar que el deployment se realice, si aparecen errores, tratar de corregirlos y probar de nuevo.
-
-**Mucha suerte!**
-
---- 
-## MI Despliegue 
-
-Para realizar este despliegue se necesita copiar el codigo nuevo a la carpeta: 
-
-**``S8_REST_Server_ConfiguracionesIniciales/113_Respaldo_DelRESTServerAGithub``** y ahi realizar la tarea solicitada!. 
-
+ 
