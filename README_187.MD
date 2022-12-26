@@ -23,3 +23,12 @@
 
 ## **¡LISTO!**, Ya podemos realizar los **``REQUEST``** dessarrollados para las colecciones **``CATEGORIAS``** , **``PRODUCTOS``** y las **``busquedas``** en **``POSTMAN``** 
 
+--- 
+## **_ATENCION_**  
+
+El capitulo donde se debe realizar el despliegue es: **``\S8_REST_Server_ConfiguracionesIniciales\113_Respaldo_DelRESTServerAGithub``** , en esta carpeta debemos 
+* **``VACIARLA``**
+* Pegar todo el nuevo proyecto a subir
+* Levantar el proyecto **``nodemon app.js``** y probar que todo este como se desarrollo en el proyecto actualizado que estamos pegando. 
+* Si todo esta bien realizar el despliegue a **Railway**!. 
+
