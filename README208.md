@@ -77,7 +77,9 @@ Mucha suerte!
         git push --set-upstream origin 6.0.0
     ```
 
-    Usamos el comando ``git push --set-upstream origin 6.0.0`` para subir a nuestro **servidor de Git (github, bitbucket,etc)** , una vez que termina de subir nuestros cambios, podemos consultar en nuestro repositorio Github [github.com/zamudpoe/tree/6.0.0] y ahi apreciaremos que ya esta creada la rama 6.0.0.
+    Usamos el comando ``git push --set-upstream origin 6.0.0`` para subir a nuestro **servidor de Git (github, bitbucket,etc)** , una vez que termina de subir nuestros cambios, podemos consultar en nuestro repositorio Github [github.com/zamudpoe/tree/6.0.0] y ahi apreciaremos que ya esta creada la rama **``6.0.0``**.
+
+    Una vez que realizamos este comando , posteriormente podemos utilizar **``git push``** 
 
 1. En [Railway], seleccionar la rama 6.0.0 para realizar el deploy desde [github.com/zamudpoe/tree/6.0.0]. 
 
@@ -99,9 +101,6 @@ a:
 **``S8_REST_Server_ConfiguracionesIniciales\113_Respaldo_DelRESTServerAGithub``** 
 
 y despues realizar todo el proceso para subir nuestros cambios a nuestro repositorio Github y realizar el despliegue automatico a Railway.
-
-
-
 
 --- 
 [github/zamudpoe]:(https://github.com/zamudpoe/curso-node-restserver-fherr/tree/5.0.0)
