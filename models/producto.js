@@ -30,8 +30,9 @@ const ProductoSchema = Schema({
     ref         : 'Categoria' ,
     required    : [ true , 'Categoria es obligatorio' ]
   }, 
-  descripcion : { type: String } ,
-  disponible  : { type: Boolean, default: true } 
+  descripcion   : { type: String } ,
+  disponible    : { type: Boolean, default: true } ,
+  img           : { type: String }
 })
 
 // NOTA: Cuando se mande llamar el metodo toJSON 
